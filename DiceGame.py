@@ -1,4 +1,3 @@
-import random
 import time
 from random import randint
 
@@ -11,37 +10,38 @@ from random import randint
 # }
 
 
-again = 'да'
-Welcome_phrases = ['Нет']
-while again != 'нет':
-    name = input('Как вас зовут? ')
-    Welcome = input(name + ', вы готовы начать игру? ').lower()
-    if Welcome == 'нет':
-        print('Хорошо! До встречи.')
+again_last_ask = ['yes', 'да']
+while again_last_ask != 'нет':
+    name = input("What's your name? // Как вас зовут? ")
+    Welcome = input(name + ', Are you ready to start // Вы готовы начать игру? ').lower()
+
+    if Welcome == 'yes' or 'да':  # If user ready to start - code is start run.Если пользователь готов-код запускается
+        print('Throwing the dice // Кидаем кости...')
+    elif Welcome == 'no' or 'нет':
+        print('All is good! Goodbye. // Хорошо! До встречи.')
         break
-    if Welcome == 'Lf' or Welcome_phrases:
-        print('Кидаем кости...')
-    for i in range(1, 6):
+
+    for i in range(1, 6):  # The visual part. Output of progress execution // Отброс цифр, типа прогресс
         time.sleep(0.2)
         print(i)
 
-    moves = ['1', '2', '3', '4', '5', '6']
-
+    moves = ['1', '2', '3', '4', '5', '6']  # Choosing a random number for dice
     computer_move = randint(1, 6)
-    print('Компьютеру выпало:', computer_move)
+    print('Computer has rolled // Компьютеру выпало:', computer_move)
     player_move = randint(1, 6)
-    print('Вам выпало:', player_move)
+    print('You roll a // Вам выпало:', player_move)
 
     if player_move > computer_move:
-        print('Вы победили!')
+        print('You win! // Вы победили!')
 
     elif player_move == computer_move:
-        print('у вас ничья!')
+        print("It's a tie // У вас ничья!")
 
     else:
-        print('Вы проиграли :(')
+        print('You lose :( // Вы проиграли :(')
 
     again = input('Сыграем еще? ').lower()
 
-if again == 'нет':
-    print('Спасибо за игру! До свидания! ')
+    if again not in again_last_ask:
+        print('Спасибо за игру! До свидания! ')
+        break
